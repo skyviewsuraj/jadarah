@@ -17,9 +17,13 @@ class RolesController extends Controller
 
     public function index(Request $request)
     {   
-        abort_if(!auth()->user()->can('role.view'),403,__('User does not have the right permissions.'));
+        abort_if(!auth()->user()->can('roles.view'),403,__('User does not have the right permissions.'));
+        $query = Role::query();
+            if ($request->has('search') && $request->search != '') {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
 
-        $roles = Role::get();
+        $roles = $query->get();
         return view('roles.index',compact('roles'));
     }
 
@@ -31,7 +35,7 @@ class RolesController extends Controller
     public function create()
     {
         
-        abort_if(!auth()->user()->can('role.create'),403,__('User does not have the right permissions.'));
+        abort_if(!auth()->user()->can('roles.create'),403,__('User does not have the right permissions.'));
         
 
         $role_permission = Permission::select('name','id')->get();
@@ -61,7 +65,7 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         
-        abort_if(!auth()->user()->can('role.create'),403,__('User does not have the right permissions.'));
+        abort_if(!auth()->user()->can('roles.create'),403,__('User does not have the right permissions.'));
         
 
         $request->validate([
@@ -104,7 +108,7 @@ class RolesController extends Controller
      */
     public function edit($id)
     {   
-        abort_if(!auth()->user()->can('role.edit'),403,__('User does not have the right permissions.'));
+        abort_if(!auth()->user()->can('roles.edit'),403,__('User does not have the right permissions.'));
 
         if(in_array($id,['2','3'])){
             Session::flash('success', trans('System role can not be edit'));
@@ -141,9 +145,9 @@ class RolesController extends Controller
     public function update(Request $request, $id)
     {   
         
-        abort_if(!auth()->user()->can('role.edit'),403,__('User does not have the right permissions.'));
+        abort_if(!auth()->user()->can('roles.edit'),403,__('User does not have the right permissions.'));
         
-        if(in_array($id,['1','2','3'])){
+        if(in_array($id,['2','3'])){
             Session::flash('success', trans('System role cannot be edit !'));
 
             return redirect(route('roles.index'));
@@ -180,7 +184,7 @@ class RolesController extends Controller
     public function destroy($id)
     {
         
-        abort_if(!auth()->user()->can('role.delete'),403,__('User does not have the right permissions.'));
+        abort_if(!auth()->user()->can('roles.delete'),403,__('User does not have the right permissions.'));
         
 
         $role = Role::find($id);

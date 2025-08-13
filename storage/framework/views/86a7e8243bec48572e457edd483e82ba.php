@@ -27,7 +27,7 @@
                             <div class="col-sm">
                                 <div class="d-flex justify-content-sm-end">
                                     <div class="widgetbar">
-                                        <a href="<?php echo e(route('roles.index')); ?>" class="float-right btn btn-primary mr-2"><i
+                                        <a href="<?php echo e(route('users.index')); ?>" class="float-right btn btn-primary mr-2"><i
                                                 class="feather icon-arrow-left mr-2"></i><?php echo e(__('Back')); ?></a>
                                     </div>
                                 </div>
@@ -168,7 +168,7 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="dob" class="form-label">Date of Birth</label>
-                                    <input type="date" class="form-control <?php $__errorArgs = ['dob'];
+                                    <input type="date" class="form-control  <?php $__errorArgs = ['dob'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -417,7 +417,130 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
+                            <!-- Student-specific fields -->
+                            <div id="student-fields" style="display: <?php echo e(old('role') == 'student' ? 'block' : 'none'); ?>;">
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <h5 class="mt-4">Student Specifications</h5>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="batch_id" class="form-label">Batch <span class="text-danger">*</span></label>
+                                        <select class="form-select <?php $__errorArgs = ['batch_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                name="batch_id" id="batch_id">
+                                            <option value="" selected disabled>Select Batch</option>
+                                            
+                                            <?php $__currentLoopData = $batches; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $batch): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($batch->id); ?>" <?php echo e(old('batch_id') == $batch->id ? 'selected' : ''); ?>>
+                                                    <?php echo e($batch->year_start); ?> - <?php echo e($batch->year_end); ?>
 
+                                                </option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </select>
+                                        <?php $__errorArgs = ['batch_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($message); ?></strong>
+                                        </span>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="student_bio" class="form-label">Short Bio <span class="text-danger">*</span></label>
+                                        <textarea class="form-control <?php $__errorArgs = ['student_bio'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                  name="student_bio" id="student_bio" rows="3"
+                                                  placeholder="Tell us about yourself"><?php echo e(old('student_bio')); ?></textarea>
+                                        <?php $__errorArgs = ['student_bio'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($message); ?></strong>
+                                        </span>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Instructor-specific fields (Hidden by default) -->
+                            <div id="instructor-fields" style="display: <?php echo e(old('role') == 'instructor' ? 'block' : 'none'); ?>;">
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <h5 class="mt-4">Instructor Specifications</h5>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="specialty" class="form-label">Specialty <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control <?php $__errorArgs = ['specialty'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                               name="specialty" id="specialty"
+                                               value="<?php echo e(old('specialty')); ?>" required>
+                                        <?php $__errorArgs = ['specialty'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($message); ?></strong>
+                                        </span>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="instructor_bio" class="form-label">Short Bio <span class="text-danger">*</span></label>
+                                        <textarea class="form-control <?php $__errorArgs = ['instructor_bio'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                  name="instructor_bio" id="instructor_bio" rows="3"
+                                                  placeholder="Tell us about yourself"><?php echo e(old('instructor_bio')); ?></textarea>
+                                        <?php $__errorArgs = ['instructor_bio'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($message); ?></strong>
+                                        </span>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                    </div>
+                                </div>
+                            </div>                
                             <div class="form-group mt-4">
                                 <button type="reset" class="btn btn-danger mr-1"><i class="fa fa-ban"></i> <?php echo e(__("Reset")); ?></button>
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-check-circle"></i>
@@ -431,6 +554,37 @@ unset($__errorArgs, $__bag); ?>
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const roleSelect = document.getElementById('role-select');
+        const instructorFields = document.getElementById('instructor-fields');
+        const studentFields = document.getElementById('student-fields');
+
+        function toggleRoleFields() {
+            instructorFields.style.display = 'none';
+            studentFields.style.display = 'none';
+            instructorFields.querySelectorAll('input, textarea').forEach(field => {
+                field.removeAttribute('required');
+            });
+            studentFields.querySelectorAll('select').forEach(field => {
+                field.removeAttribute('required');
+            });
+            if (roleSelect.value === 'instructor') {
+                instructorFields.style.display = 'block';
+                instructorFields.querySelectorAll('input, textarea').forEach(field => {
+                    field.setAttribute('required', 'required');
+                });
+            } else if (roleSelect.value === 'student') {
+                studentFields.style.display = 'block';
+                studentFields.querySelectorAll('select').forEach(field => {
+                    field.setAttribute('required', 'required');
+                });
+            }
+        }
+        roleSelect.addEventListener('change', toggleRoleFields);
+        toggleRoleFields();
+    });
+    </script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\laraveljadrah\resources\views/users/create.blade.php ENDPATH**/ ?>

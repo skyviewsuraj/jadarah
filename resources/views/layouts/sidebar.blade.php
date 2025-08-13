@@ -17,7 +17,7 @@
                 <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" height="17">
+                <img src="{{ URL::asset('build/images/jadrah_logo.png') }}" alt="" height="70">
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -85,9 +85,10 @@
                 <li class="menu-title"><span>@lang('translation.menu')</span></li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="{{ route('dashboard') }}">
-                        <i class="bx bxs-dashboard"></i> <span>@lang('Dashboard')</span>
+                        <i class="bx bxs-dashboard"></i> <span>@lang('translation.dashboard')</span>
                     </a>
                 </li>
+                
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarUsers" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarUsers">
                         <i class="ri-user-line"></i> <span>@lang('translation.users')</span>
@@ -95,13 +96,28 @@
                     <div class="collapse menu-dropdown" id="sidebarUsers">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('users.index') }}" class="nav-link">@lang('translation.users')</a>
+                                <a href="{{ route('users.index') }}" class="nav-link">@lang('translation.all_users')</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('all.students') }}" class="nav-link">@lang('translation.students')</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('all.instructors') }}" class="nav-link">@lang('translation.instructors')</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarRoles" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarRoles">
+                        <i class="ri-user-line"></i> <span>@lang('translation.roles_and_permissions')</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarRoles">
+                        <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{ route('roles.index') }}" class="nav-link">@lang('translation.roles')</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('roles.index') }}" class="nav-link">@lang('translation.permissions')</a>
+                                <a href="{{ route('permissions.index') }}" class="nav-link">@lang('translation.permissions')</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('users.assign-role-form') }}" class="nav-link">@lang('translation.assign_role_to_user')</a>
@@ -110,6 +126,40 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarLMS" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLMS">
+                        <i class="ri-book-2-line"></i> <span>@lang('translation.lms')</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarLMS">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('majors.index') }}" class="nav-link">@lang('translation.majors')</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('courses.index') }}" class="nav-link">@lang('translation.courses')</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('subcategories.index') }}" class="nav-link">@lang('translation.subcategories')</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarBatchesSessions" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarBatchesSessions">
+                        <i class="ri-group-line"></i> <span>@lang('translation.batches_sessions')</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarBatchesSessions">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('batches.index') }}" class="nav-link">@lang('translation.all_batches')</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('sessions.index') }}" class="nav-link">@lang('translation.all_sessions')</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarDashboards">
                         <i class="ri-dashboard-2-line"></i> <span>@lang('translation.dashboards')</span>
@@ -149,8 +199,7 @@
                             </li>
                         </ul>
                     </div>
-                </li> <!-- end Dashboard Menu -->
-
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button"
@@ -511,7 +560,7 @@
                             </li>
                         </ul>
                     </div>
-                </li> <!-- end Dashboard Menu -->
+                </li> 
 
 
                 <li class="menu-title"><i class="ri-more-fill"></i> <span>@lang('translation.pages')</span></li>
@@ -1163,7 +1212,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
 
             </ul>
         </div>

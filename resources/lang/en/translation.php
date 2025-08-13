@@ -233,10 +233,29 @@ return [
     "funnel" => "Funnel",
 
 
-     "users" => "Users",
+    "users" => "Users",
     "roles" => "Roles",
     "permissions" => "Permissions",
     "assign_role_to_user" => "Assign Role To User",
+
+
+    "dashboard" => "Dashboard",
+    "users" => "Users",
+    "all_users" => "All Users",
+    "students" => "Students",
+    "instructors" => "Instructors",
+    "roles" => "Roles",
+    "permissions" => "Permissions",
+    "assign_role_to_user" => "Assign Role To User",
+    "lms" => "LMS",
+    "majors" => "Majors",
+    "courses" => "Courses",
+    "subcategories" => "Subcategories",
+    "batches_sessions" => "Batches & Sessions",
+    "all_batches" => "All Batches",
+    "all_sessions" => "All Sessions",
+    "all_sessions" => "All Sessions",
+    "roles_and_permissions" => "Roles & Permissions",
 ];
 ?>
 

@@ -28,12 +28,15 @@
                             </div>
                             <div class="col-sm">
                                 <div class="d-flex justify-content-sm-end">
-                                    <div class="search-box ms-2">
-                                        <input type="text" class="form-control" id="searchProductList" placeholder="Search ...">
-                                        <i class="ri-search-line search-icon"></i>
-                                    </div>
+                                    <form id="search-form" action="{{ route('roles.index') }}" method="GET">
+                                        <div class="search-box ms-2">
+                                            <input type="text" class="form-control" name="search" id="searchProductList" placeholder="Search ..." value="{{ request('search') }}">
+                                            <i class="ri-search-line search-icon"></i>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
 
@@ -66,7 +69,7 @@
                                             @forelse ($roles as $index => $role)
                                                 <tr>
                                                     <td>{{ $index + 1 }}</td>
-                                                    <td>{{ $role->name }}</td>
+                                                    <td>{{ ucfirst($role->name) }}</td>
                                                     <td>
                                                         @include('roles.action', ['id' => $role->id, 'name' => $role->name])
                                                     </td>

@@ -35,8 +35,8 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        User::create(['name' => 'admin','email' => 'admin@gmail.com','password' => Hash::make('12345678'),'email_verified_at'=>now(),'avatar' => 'avatar-1.jpg','created_at' => now(),]);
-    }
+        
+    }   
     /**
      * Reverse the migrations.
      *

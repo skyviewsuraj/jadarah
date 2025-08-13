@@ -212,5 +212,23 @@ return [
     "links" => "روابط",
     "range-area" => "نطاق المنطقة",
     "funnel" => "قمع",
+
+
+    "dashboard" => "لوحة التحكم",
+    "users" => "المستخدمون",
+    "all_users" => "جميع المستخدمين",
+    "students" => "الطلاب",
+    "instructors" => "المدربون",
+    "roles" => "الأدوار",
+    "permissions" => "الصلاحيات",
+    "assign_role_to_user" => "تعيين دور للمستخدم",
+    "lms" => "نظام إدارة التعلم",
+    "majors" => "التخصصات",
+    "courses" => "المقررات",
+    "subcategories" => "الفئات الفرعية",
+    "batches_sessions" => "الدفعات والجلسات",
+    "all_batches" => "جميع الدفعات",
+    "all_sessions" => "جميع الجلسات",
+    "roles_and_permissions" => "الأدوار والصلاحيات",
 ];
 ?>

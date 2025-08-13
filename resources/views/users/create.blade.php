@@ -27,7 +27,7 @@
                             <div class="col-sm">
                                 <div class="d-flex justify-content-sm-end">
                                     <div class="widgetbar">
-                                        <a href="{{route('roles.index')}}" class="float-right btn btn-primary mr-2"><i
+                                        <a href="{{route('users.index')}}" class="float-right btn btn-primary mr-2"><i
                                                 class="feather icon-arrow-left mr-2"></i>{{ __('Back') }}</a>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="dob" class="form-label">Date of Birth</label>
-                                    <input type="date" class="form-control @error('dob') is-invalid @enderror" data-provider="flatpickr"
+                                    <input type="date" class="form-control  @error('dob') is-invalid @enderror" data-provider="flatpickr"
                                         data-date-format="d M, Y" name="dob" value="{{ old('dob') }}" id="dob">
                                     @error('dob')
                                     <span class="invalid-feedback" role="alert">
@@ -239,7 +239,73 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            <!-- Student-specific fields -->
+                            <div id="student-fields" style="display: {{ old('role') == 'student' ? 'block' : 'none' }};">
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <h5 class="mt-4">Student Specifications</h5>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="batch_id" class="form-label">Batch <span class="text-danger">*</span></label>
+                                        <select class="form-select @error('batch_id') is-invalid @enderror"
+                                                name="batch_id" id="batch_id">
+                                            <option value="" selected disabled>Select Batch</option>
+                                            {{-- Assuming a $batches variable is passed from the controller --}}
+                                            @foreach ($batches as $batch)
+                                                <option value="{{ $batch->id }}" {{ old('batch_id') == $batch->id ? 'selected' : '' }}>
+                                                    {{ $batch->year_start }} - {{ $batch->year_end }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('batch_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="student_bio" class="form-label">Short Bio <span class="text-danger">*</span></label>
+                                        <textarea class="form-control @error('student_bio') is-invalid @enderror"
+                                                  name="student_bio" id="student_bio" rows="3"
+                                                  placeholder="Tell us about yourself">{{ old('student_bio') }}</textarea>
+                                        @error('student_bio')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Instructor-specific fields (Hidden by default) -->
+                            <div id="instructor-fields" style="display: {{ old('role') == 'instructor' ? 'block' : 'none' }};">
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <h5 class="mt-4">Instructor Specifications</h5>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="specialty" class="form-label">Specialty <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control @error('specialty') is-invalid @enderror"
+                                               name="specialty" id="specialty"
+                                               value="{{ old('specialty') }}" required>
+                                        @error('specialty')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="instructor_bio" class="form-label">Short Bio <span class="text-danger">*</span></label>
+                                        <textarea class="form-control @error('instructor_bio') is-invalid @enderror"
+                                                  name="instructor_bio" id="instructor_bio" rows="3"
+                                                  placeholder="Tell us about yourself">{{ old('instructor_bio') }}</textarea>
+                                        @error('instructor_bio')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>                
                             <div class="form-group mt-4">
                                 <button type="reset" class="btn btn-danger mr-1"><i class="fa fa-ban"></i> {{ __("Reset")}}</button>
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-check-circle"></i>
@@ -253,4 +319,35 @@
     </div>
 @endsection
 @section('script')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const roleSelect = document.getElementById('role-select');
+        const instructorFields = document.getElementById('instructor-fields');
+        const studentFields = document.getElementById('student-fields');
+
+        function toggleRoleFields() {
+            instructorFields.style.display = 'none';
+            studentFields.style.display = 'none';
+            instructorFields.querySelectorAll('input, textarea').forEach(field => {
+                field.removeAttribute('required');
+            });
+            studentFields.querySelectorAll('select').forEach(field => {
+                field.removeAttribute('required');
+            });
+            if (roleSelect.value === 'instructor') {
+                instructorFields.style.display = 'block';
+                instructorFields.querySelectorAll('input, textarea').forEach(field => {
+                    field.setAttribute('required', 'required');
+                });
+            } else if (roleSelect.value === 'student') {
+                studentFields.style.display = 'block';
+                studentFields.querySelectorAll('select').forEach(field => {
+                    field.setAttribute('required', 'required');
+                });
+            }
+        }
+        roleSelect.addEventListener('change', toggleRoleFields);
+        toggleRoleFields();
+    });
+    </script>
 @endsection

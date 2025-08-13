@@ -28,12 +28,15 @@
                             </div>
                             <div class="col-sm">
                                 <div class="d-flex justify-content-sm-end">
-                                    <div class="search-box ms-2">
-                                        <input type="text" class="form-control" id="searchProductList" placeholder="Search ...">
-                                        <i class="ri-search-line search-icon"></i>
-                                    </div>
+                                    <form id="search-form" action="<?php echo e(route('roles.index')); ?>" method="GET">
+                                        <div class="search-box ms-2">
+                                            <input type="text" class="form-control" name="search" id="searchProductList" placeholder="Search ..." value="<?php echo e(request('search')); ?>">
+                                            <i class="ri-search-line search-icon"></i>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
 
@@ -66,7 +69,7 @@
                                             <?php $__empty_1 = true; $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                                 <tr>
                                                     <td><?php echo e($index + 1); ?></td>
-                                                    <td><?php echo e($role->name); ?></td>
+                                                    <td><?php echo e(ucfirst($role->name)); ?></td>
                                                     <td>
                                                         <?php echo $__env->make('roles.action', ['id' => $role->id, 'name' => $role->name], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                                     </td>
